@@ -1,0 +1,32 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    hexapod_position_controller:
+      type: forward_command_controller/ForwardCommandController
+
+hexapod_position_controller:
+  ros__parameters:
+    joints:
+      - L1_Hip_Joint
+      - L1_Knee_Joint
+      - L1_Ankle_Joint
+      - L2_Hip_Joint
+      - L2_Knee_Joint
+      - L2_Ankle_Joint
+      - L3_Hip_Joint
+      - L3_Knee_Joint
+      - L3_Ankle_Joint
+      - R1_Hip_Joint
+      - R1_Knee_Joint
+      - R1_Ankle_Joint
+      - R2_Hip_Joint
+      - R2_Knee_Joint
+      - R2_Ankle_Joint
+      - R3_Hip_Joint
+      - R3_Knee_Joint
+      - R3_Ankle_Joint
+    interface_name: position

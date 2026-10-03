@@ -1,0 +1,478 @@
+<?xml version='1.0' encoding='utf-8'?>
+<robot name="hexapod">
+    <link name="base_footprint"/>
+    <link name="base_link">
+        <inertial>
+            <origin xyz="0.06531354373116458 0.09547813117381193 0.055845566802461395" rpy="0.0 0.0 0.0" />
+            <mass value="10.813766886555406" />
+            <inertia ixx="0.052834066282912866" iyy="0.038235219700231526" izz="0.058132624055021655" ixy="-6.396865406510826e-05" iyz="-0.001076769870526382" ixz="-8.416476796523591e-05" />
+        </inertial>
+        <visual name="base_link_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="base_link_collision">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L1_Hip">
+        <inertial>
+            <origin xyz="0.036074048808862946 0.0008949127635549203 -0.027882387987432537" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6313074615876145" />
+            <inertia ixx="0.00032774839375865165" iyy="0.0003956699823553893" izz="0.0002593342441534908" ixy="-7.110380838515507e-06" iyz="1.8547901923319203e-05" ixz="1.1372181455404608e-05" />
+        </inertial>
+        <visual name="L1_Hip_visual">
+            <origin xyz="-7.947591029733303e-11 2.8394247545868725e-05 -0.03750000103512392" rpy="3.9470377442356937e-16 -0.0 0.0" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L1_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L1_Hip_collision">
+            <origin xyz="-7.947591029733303e-11 2.8394247545868725e-05 -0.03750000103512392" rpy="3.9470377442356937e-16 -0.0 0.0" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L1_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L2_Hip">
+        <inertial>
+            <origin xyz="0.03607404944183094 0.0008949172145009408 -0.027882387844535943" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6313073388499962" />
+            <inertia ixx="0.0003277483586499371" iyy="0.00039566996489754855" izz="0.00025933422894452995" ixy="-7.110376138875333e-06" iyz="1.8547895317003865e-05" ixz="1.1372177166432535e-05" />
+        </inertial>
+        <visual name="L2_Hip_visual">
+            <origin xyz="2.3092638912203257e-16 2.8396418664446987e-05 -0.037500000000000304" rpy="3.947037744235681e-16 7.394140421080006e-63 1.0947644252537633e-47" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L2_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L2_Hip_collision">
+            <origin xyz="2.3092638912203257e-16 2.8396418664446987e-05 -0.037500000000000304" rpy="3.947037744235681e-16 7.394140421080006e-63 1.0947644252537633e-47" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L2_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L3_Hip">
+        <inertial>
+            <origin xyz="0.03607404682162757 0.0008949164118949327 -0.02788238784453293" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6313073388499971" />
+            <inertia ixx="0.00032774835013938027" iyy="0.0003956699570360784" izz="0.0002593342125795546" ixy="-7.110383350401172e-06" iyz="1.854789276545464e-05" ixz="1.1372179198901924e-05" />
+        </inertial>
+        <visual name="L3_Hip_visual">
+            <origin xyz="-1.8717173055904367e-09 2.8395102015679187e-05 -0.03749999999999909" rpy="3.947037744235681e-16 -0.0 0.0" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L3_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L3_Hip_collision">
+            <origin xyz="-1.8717173055904367e-09 2.8395102015679187e-05 -0.03749999999999909" rpy="3.947037744235681e-16 -0.0 0.0" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L3_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R1_Hip">
+        <inertial>
+            <origin xyz="-0.03607404965134453 -0.0008949153164974533 -0.027882386952298888" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6313074615876134" />
+            <inertia ixx="0.0003277483895034669" iyy="0.000395669987103461" izz="0.00025933424464971884" ixy="-7.110381913228742e-06" iyz="-1.8547900647741893e-05" ixz="-1.1372178728115989e-05" />
+        </inertial>
+        <visual name="R1_Hip_visual">
+            <origin xyz="-5.436926464597036e-10 -2.8396543466868707e-05 -0.0375000000000004" rpy="3.94703774423568e-16 2.4310372503823276e-15 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R1_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R1_Hip_collision">
+            <origin xyz="-5.436926464597036e-10 -2.8396543466868707e-05 -0.0375000000000004" rpy="3.94703774423568e-16 2.4310372503823276e-15 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R1_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R2_Hip">
+        <inertial>
+            <origin xyz="-0.03607404878849106 -0.000894915152145235 -0.027882386952301268" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6313074615876132" />
+            <inertia ixx="0.00032774839016068685" iyy="0.000395669981303616" izz="0.0002593342395016667" ixy="-7.110381836792648e-06" iyz="-1.8547900178346445e-05" ixz="-1.1372180273974968e-05" />
+        </inertial>
+        <visual name="R2_Hip_visual">
+            <origin xyz="5.329070518200751e-17 -2.839641866355881e-05 -0.03749999999999999" rpy="3.94703774423568e-16 9.526600354478707e-17 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R2_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R2_Hip_collision">
+            <origin xyz="5.329070518200751e-17 -2.839641866355881e-05 -0.03749999999999999" rpy="3.94703774423568e-16 9.526600354478707e-17 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R2_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R3_Hip">
+        <inertial>
+            <origin xyz="-0.036074045843427695 -0.0008949187486207677 -0.0278823878445404" rpy="0.0 -0.0 0.0" />
+            <mass value="0.6313073388499953" />
+            <inertia ixx="0.00032774835504940404" iyy="0.0003956699565596661" izz="0.0002593342170091571" ixy="-7.1103939596464246e-06" iyz="-1.854789357175931e-05" ixz="-1.13721841128784e-05" />
+        </inertial>
+        <visual name="R3_Hip_visual">
+            <origin xyz="1.8717173855264947e-09 -2.839773531169598e-05 -0.0374999999999994" rpy="3.947037744235682e-16 -8.475327317661527e-16 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R3_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R3_Hip_collision">
+            <origin xyz="1.8717173855264947e-09 -2.839773531169598e-05 -0.0374999999999994" rpy="3.947037744235682e-16 -8.475327317661527e-16 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R3_Hip.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R1_Crus">
+        <inertial>
+            <origin xyz="-0.03517075961165982 -4.313120255821091e-06 0.03061202549431937" rpy="0.0 -0.0 0.0" />
+            <mass value="0.19082842966424732" />
+            <inertia ixx="0.00020621482504545917" iyy="0.0003411740602251795" izz="0.0001559819905432797" ixy="9.615429520313057e-10" iyz="2.39260165845511e-08" ixz="3.622540986096274e-08" />
+        </inertial>
+        <visual name="R1_Crus_visual">
+            <origin xyz="-0.018685768413435184 0.017921808755716372 -0.011675028544473465" rpy="2.9586803559888716e-15 9.464173730837164e-15 -3.141592653589791" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R1_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R1_Crus_collision">
+            <origin xyz="-0.018685768413435184 0.017921808755716372 -0.011675028544473465" rpy="2.9586803559888716e-15 9.464173730837164e-15 -3.141592653589791" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R1_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R2_Crus">
+        <inertial>
+            <origin xyz="-0.03482924093203289 4.313120255194925e-06 0.030612025369516436" rpy="0.0 -0.0 0.0" />
+            <mass value="0.19082842966424732" />
+            <inertia ixx="0.00020621482504546004" iyy="0.0003411740602251795" izz="0.00015598199054327883" ixy="9.61542952681756e-10" iyz="-2.3926016585340765e-08" ixz="-3.62254098628518e-08" />
+        </inertial>
+        <visual name="R2_Crus_visual">
+            <origin xyz="-0.05131423213025757 -0.017921808755717222 -0.01167502866927641" rpy="-3.2267052699708074e-15 2.8845764424670263e-15 2.177306834595132e-16" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R2_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R2_Crus_collision">
+            <origin xyz="-0.05131423213025757 -0.017921808755717222 -0.01167502866927641" rpy="-3.2267052699708074e-15 2.8845764424670263e-15 2.177306834595132e-16" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R2_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R3_Crus">
+        <inertial>
+            <origin xyz="-0.034829239060315854 4.313120255874381e-06 0.030612026686164775" rpy="0.0 -0.0 0.0" />
+            <mass value="0.19082842966424732" />
+            <inertia ixx="0.00020621482504546004" iyy="0.00034117406022517865" izz="0.00015598199054327883" ixy="9.615429524649247e-10" iyz="-2.392601658508387e-08" ixz="-3.6225409862044234e-08" />
+        </inertial>
+        <visual name="R3_Crus_visual">
+            <origin xyz="-0.0513142302585405 -0.017921808755716497 -0.011675027352628008" rpy="-2.453621512756187e-15 8.180845673978275e-15 -7.250680518514371e-16" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R3_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R3_Crus_collision">
+            <origin xyz="-0.0513142302585405 -0.017921808755716497 -0.011675027352628008" rpy="-2.453621512756187e-15 8.180845673978275e-15 -7.250680518514371e-16" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R3_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L1_Crus">
+        <inertial>
+            <origin xyz="0.03517075898849346 -4.314155378537521e-06 -0.03061203319839718" rpy="0.0 -0.0 0.0" />
+            <mass value="0.19082842966424732" />
+            <inertia ixx="0.00020621482504546004" iyy="0.00034117406022517865" izz="0.0001559819905432797" ixy="-9.61542952898645e-10" iyz="-2.3926016584556575e-08" ixz="3.622540986258943e-08" />
+        </inertial>
+        <visual name="L1_Crus_visual">
+            <origin xyz="0.018685767790268776 0.017921807720593708 0.011675020840395725" rpy="-3.1415926535897922 -3.556422298105262e-15 -3.77670496181703e-30" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L1_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L1_Crus_collision">
+            <origin xyz="0.018685767790268776 0.017921807720593708 0.011675020840395725" rpy="-3.1415926535897922 -3.556422298105262e-15 -3.77670496181703e-30" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L1_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L2_Crus">
+        <inertial>
+            <origin xyz="0.0351707590679669 -4.313120255696745e-06 -0.030612025369516665" rpy="0.0 -0.0 0.0" />
+            <mass value="0.19082842966424732" />
+            <inertia ixx="0.00020621482504545988" iyy="0.0003411740602251795" izz="0.00015598199054327883" ixy="-9.615429524649239e-10" iyz="-2.392601658455348e-08" ixz="3.622540986194889e-08" />
+        </inertial>
+        <visual name="L2_Crus_visual">
+            <origin xyz="0.018685767869742236 0.017921808755716546 0.011675028669276171" rpy="-3.1415926535897922 -8.5685095000437e-15 -9.204085185479184e-30" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L2_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L2_Crus_collision">
+            <origin xyz="0.018685767869742236 0.017921808755716546 0.011675028669276171" rpy="-3.1415926535897922 -8.5685095000437e-15 -9.204085185479184e-30" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L2_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L3_Crus">
+        <inertial>
+            <origin xyz="0.0351707571962495 -4.313120254604285e-06 -0.030612034052867162" rpy="0.0 -0.0 0.0" />
+            <mass value="0.19082842966424732" />
+            <inertia ixx="0.0002062148250454596" iyy="0.0003411740602251804" izz="0.00015598199054328056" ixy="-9.615429526817593e-10" iyz="-2.39260165846797e-08" ixz="3.622540986223205e-08" />
+        </inertial>
+        <visual name="L3_Crus_visual">
+            <origin xyz="0.018685765998024823 0.017921808755717642 0.011675019985925648" rpy="-3.1415926535897922 -9.495586488597836e-15 -8.631228484744494e-30" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L3_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L3_Crus_collision">
+            <origin xyz="0.018685765998024823 0.017921808755717642 0.011675019985925648" rpy="-3.1415926535897922 -9.495586488597836e-15 -8.631228484744494e-30" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L3_Crus.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L1_Foot">
+        <inertial>
+            <origin xyz="0.013181239373879201 0.03623956443151984 -0.001257225251094316" rpy="0.0 -0.0 0.0" />
+            <mass value="1.073264117385357" />
+            <inertia ixx="0.0013377939900751559" iyy="0.001468280446989316" izz="0.00043109076119057397" ixy="-9.658567712598318e-06" iyz="1.588424012485386e-05" ixz="0.000412185184599299" />
+        </inertial>
+        <visual name="L1_Foot_visual">
+            <origin xyz="-0.01010000007948257 0.019400003427672525 -0.02056704031521055" rpy="6.610591211137782e-14 9.860761315262522e-32 -7.376125237048963e-48" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L1_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L1_Foot_collision">
+            <origin xyz="-0.01010000007948257 0.019400003427672525 -0.02056704031521055" rpy="6.610591211137782e-14 9.860761315262522e-32 -7.376125237048963e-48" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L1_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L2_Foot">
+        <inertial>
+            <origin xyz="0.013181239453366444 0.036239556602639486 -0.0012572242159687886" rpy="0.0 -0.0 0.0" />
+            <mass value="1.0732641173853565" />
+            <inertia ixx="0.001337793990074499" iyy="0.0014682804469887192" izz="0.00043109076119062254" ixy="-9.658567712379743e-06" iyz="1.588424012486442e-05" ixz="0.00041218518460177096" />
+        </inertial>
+        <visual name="L2_Foot_visual">
+            <origin xyz="-0.010100000000000726 0.019399995598791568 -0.02056703928008564" rpy="3.921169725428927e-14 3.697785493220852e-32 -2.766046963891421e-48" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L2_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L2_Fo_collision">
+            <origin xyz="-0.010100000000000726 0.019399995598791568 -0.02056703928008564" rpy="3.921169725428927e-14 3.697785493220852e-32 -2.766046963891421e-48" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L2_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="L3_Foot">
+        <inertial>
+            <origin xyz="0.013181237581652176 0.036239565307096475 -0.0012572242159756275" rpy="0.0 -0.0 0.0" />
+            <mass value="1.0732641173853583" />
+            <inertia ixx="0.0013377939893961677" iyy="0.001468280446984646" izz="0.0004310907605202352" ixy="-9.658567342821192e-06" iyz="1.5884239262163734e-05" ixz="0.0004121851846149002" />
+        </inertial>
+        <visual name="L3_Foot_visual">
+            <origin xyz="-0.010100001871717198 0.019400004282141385 -0.020567039280084735" rpy="-1.0782612974161142e-15 -2.826793622035183e-44 2.114520685451522e-60" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L3_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="L3_Foot_collision">
+            <origin xyz="-0.010100001871717198 0.019400004282141385 -0.020567039280084735" rpy="-1.0782612974161142e-15 -2.826793622035183e-44 2.114520685451522e-60" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/L3_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R1_Foot">
+        <inertial>
+            <origin xyz="-0.013181239997059785 -0.03623955674854753 -0.001257224215969459" rpy="0.0 -0.0 0.0" />
+            <mass value="1.0732641173853579" />
+            <inertia ixx="0.0013377939894026938" iyy="0.0014682804469890662" izz="0.0004310907605181544" ixy="-9.65856734290105e-06" iyz="-1.5884239262463902e-05" ixz="-0.0004121851845996403" />
+        </inertial>
+        <visual name="R1_Foot_visual">
+            <origin xyz="0.010099999456307032 -0.019399995723592314 -0.020567039280086543" rpy="-3.744677003792175e-15 2.4310372503823272e-15 -3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R1_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R1_Foot_collision">
+            <origin xyz="0.010099999456307032 -0.019399995723592314 -0.020567039280086543" rpy="-3.744677003792175e-15 2.4310372503823272e-15 -3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R1_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R2_Foot">
+        <inertial>
+            <origin xyz="-0.01318123945336847 -0.03623955662374484 -0.0012572242159600933" rpy="0.0 -0.0 0.0" />
+            <mass value="1.0732641173853559" />
+            <inertia ixx="0.0013377939894066112" iyy="0.0014682804469916474" izz="0.00043109076051680824" ixy="-9.658567342859092e-06" iyz="-1.588424047076036e-05" ixz="-0.0004121851845852742" />
+        </inertial>
+        <visual name="R2_Foot_visual">
+            <origin xyz="0.010099999999999625 -0.019399995598789698 -0.020567039280085676" rpy="2.824311711540962e-16 9.526600354478716e-17 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R2_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R2_Foot_collision">
+            <origin xyz="0.010099999999999625 -0.019399995598789698 -0.020567039280085676" rpy="2.824311711540962e-16 9.526600354478716e-17 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R2_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="R3_Foot">
+        <inertial>
+            <origin xyz="-0.013181237581652745 -0.036239557919287575 -0.0012572242159659775" rpy="0.0 -0.0 0.0" />
+            <mass value="1.0732641173853603" />
+            <inertia ixx="0.0013377939900591392" iyy="0.001468280446978415" izz="0.0004310907611956749" ixy="-9.658567712241026e-06" iyz="-1.5884240124941092e-05" ixz="-0.00041218518459575017" />
+        </inertial>
+        <visual name="R3_Foot_visual">
+            <origin xyz="0.010100001871717269 -0.019399996915439015 -0.020567039280085346" rpy="-2.089940004168009e-16 -8.475327317661533e-16 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R3_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </visual>
+        <collision name="R3_Foot_collision">
+            <origin xyz="0.010100001871717269 -0.019399996915439015 -0.020567039280085346" rpy="-2.089940004168009e-16 -8.475327317661533e-16 3.141592653589793" />
+            <geometry>
+                <mesh filename="package://hexapod_description/meshes/R3_Foot.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+        <parent link="base_footprint" />
+        <child link="base_link" />
+    </joint>
+    <joint name="L1_Hip_Joint" type="continuous">
+        <origin xyz="0.13403352999999996 -0.003461909999999939 0.07190117" rpy="6.285942159669887e-16 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="L1_Hip" />
+        <axis xyz="0.0 6.285942159669887e-16 1.0" />
+    </joint>
+    <joint name="L2_Hip_Joint" type="continuous">
+        <origin xyz="0.15529999999999994 0.09500000000000006 0.0712" rpy="6.7540927075394e-16 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="L2_Hip" />
+        <axis xyz="0.0 6.7540927075394e-16 1.0" />
+    </joint>
+    <joint name="L3_Hip_Joint" type="continuous">
+        <origin xyz="0.13403341999999996 0.19346200000000002 0.0709" rpy="5.150734716496737e-16 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="L3_Hip" />
+        <axis xyz="0.0 5.150734716496737e-16 1.0" />
+    </joint>
+    <joint name="R1_Hip_Joint" type="continuous">
+        <origin xyz="-0.003944870000000052 -0.0033736899999999535 0.07150000000000001" rpy="-6.157686041962991e-16 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="R1_Hip" />
+        <axis xyz="0.0 -6.157686041962991e-16 1.0" />
+    </joint>
+    <joint name="R2_Hip_Joint" type="continuous">
+        <origin xyz="-0.025300000000000048 0.09500000000000006 0.0712" rpy="-8.625958201876691e-16 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="R2_Hip" />
+        <axis xyz="0.0 -8.625958201876691e-16 1.0" />
+    </joint>
+    <joint name="R3_Hip_Joint" type="continuous">
+        <origin xyz="-0.004033420000000057 0.19346200000000002 0.0709" rpy="-5.952461906087811e-16 -0.0 0.0" />
+        <parent link="base_link" />
+        <child link="R3_Hip" />
+        <axis xyz="0.0 -5.952461906087811e-16 1.0" />
+    </joint>
+    <joint name="R1_Knee_Joint" type="continuous">
+        <origin xyz="-0.03990000000000004 0.03361222000000002 -0.033724999999999984" rpy="1.5707963267948983 -5.3536990866860975e-48 8.694335908329952e-33" />
+        <parent link="R1_Hip" />
+        <child link="R1_Crus" />
+        <axis xyz="8.694335908329952e-33 -1.0115053870209175e-15 -1.0" />
+    </joint>
+    <joint name="R2_Knee_Joint" type="continuous">
+        <origin xyz="-0.039900000000000005 0.03361222000000003 -0.03372499999999997" rpy="1.5707963267948983 -3.0032212015911526e-48 3.4816088036894984e-33" />
+        <parent link="R2_Hip" />
+        <child link="R2_Crus" />
+        <axis xyz="3.4816088036894984e-33 -9.473014393433699e-16 -1.0" />
+    </joint>
+    <joint name="R3_Knee_Joint" type="continuous">
+        <origin xyz="-0.03989999999999999 0.03361222000000002 -0.033724999999999984" rpy="1.570796326794898 -5.061297276388136e-49 8.502863783490581e-34" />
+        <parent link="R3_Hip" />
+        <child link="R3_Crus" />
+        <axis xyz="8.502863783490581e-34 -6.944343755255036e-16 -1.0" />
+    </joint>
+    <joint name="L1_Knee_Joint" type="continuous">
+        <origin xyz="0.03989999999999997 -0.03361223000000004 -0.03372499999999998" rpy="1.5707963267948957 -0.0 0.0" />
+        <parent link="L1_Hip" />
+        <child link="L1_Crus" />
+        <axis xyz="0.0 -3.9650022633849155e-16 1.0" />
+    </joint>
+    <joint name="L2_Knee_Joint" type="continuous">
+        <origin xyz="0.039900000000000005 -0.033612220000000026 -0.03372499999999998" rpy="1.5707963267948966 -0.0 0.0" />
+        <parent link="L2_Hip" />
+        <child link="L2_Crus" />
+        <axis xyz="-0.0 7.2109419570568655e-16 1.0" />
+    </joint>
+    <joint name="L3_Knee_Joint" type="continuous">
+        <origin xyz="0.03990000000000002 -0.033612230000000014 -0.033724999999999984" rpy="1.570796326794897 -0.0 0.0" />
+        <parent link="L3_Hip" />
+        <child link="L3_Crus" />
+        <axis xyz="-0.0 8.538086465379591e-16 1.0" />
+    </joint>
+    <joint name="L1_Ankle_Joint" type="continuous">
+        <origin xyz="0.07000000000000003 0.0 0.0" rpy="-1.5707963267948961 5.1796479912722884e-61 -1.3063417489326808e-45" />
+        <parent link="L1_Crus" />
+        <child link="L1_Foot" />
+        <axis xyz="0.0 1.0 -7.480279667283062e-17" />
+    </joint>
+    <joint name="L2_Ankle_Joint" type="continuous">
+        <origin xyz="0.07000000000000002 0.0 0.0" rpy="-1.5707963267948972 -1.9039111407057832e-59 -2.640308508991052e-44" />
+        <parent link="L2_Crus" />
+        <child link="L2_Foot" />
+        <axis xyz="0.0 1.0 -7.480279667283062e-17" />
+    </joint>
+    <joint name="L3_Ankle_Joint" type="continuous">
+        <origin xyz="0.06999999999999998 0.0 0.0" rpy="-1.5707963267948974 -2.4135408364719946e-59 -2.826793622035183e-44" />
+        <parent link="L3_Crus" />
+        <child link="L3_Foot" />
+        <axis xyz="0.0 1.0 -7.480279667283062e-17" />
+    </joint>
+    <joint name="R1_Ankle_Joint" type="continuous">
+        <origin xyz="-0.07000000000000002 0.0 0.0" rpy="-1.5707963267948974 -8.694335908329952e-33 -4.894512470596831e-34" />
+        <parent link="R1_Crus" />
+        <child link="R1_Foot" />
+        <axis xyz="-0.0 -1.0 7.480279667283062e-17" />
+    </joint>
+    <joint name="R2_Ankle_Joint" type="continuous">
+        <origin xyz="-0.07000000000000002 0.0 0.0" rpy="-1.5707963267948974 -3.481608803689402e-33 1.0186570131224499e-31" />
+        <parent link="R2_Crus" />
+        <child link="R2_Foot" />
+        <axis xyz="0.0 -1.0 7.480279667283062e-17" />
+    </joint>
+    <joint name="R3_Ankle_Joint" type="continuous">
+        <origin xyz="-0.07000000000000002 0.0 0.0" rpy="-1.5707963267948972 -8.502863783488482e-34 3.021914200080796e-31" />
+        <parent link="R3_Crus" />
+        <child link="R3_Foot" />
+        <axis xyz="0.0 -1.0 7.480279667283062e-17" />
+    </joint>
+</robot>
