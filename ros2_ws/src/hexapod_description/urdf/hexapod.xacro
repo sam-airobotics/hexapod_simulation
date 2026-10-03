@@ -14,13 +14,13 @@
                 <mesh filename="package://hexapod_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
             <material name="Black">
-                <color rgba="0.000000 0.000000 0.000000 1.000000"/>
+                <color rgba="0.0250000 0.02500000 0.02500000 1.00000"/>
             </material>
         </visual>
         <collision name="base_link_collision">
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="0.34 0.25 0.10" />
+                <mesh filename="package://hexapod_description/meshes/base_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -42,7 +42,7 @@
         <collision name="L1_Hip_collision">
             <origin xyz="-7.947591029733303e-11 2.8394247545868725e-05 -0.03750000103512392" rpy="3.9470377442356937e-16 -0.0 0.0" />
             <geometry>
-                <box size="0.09 0.09 0.08" />
+                <mesh filename="package://hexapod_description/meshes/L1_Hip.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -64,7 +64,7 @@
         <collision name="L2_Hip_collision">
             <origin xyz="2.3092638912203257e-16 2.8396418664446987e-05 -0.037500000000000304" rpy="3.947037744235681e-16 7.394140421080006e-63 1.0947644252537633e-47" />
             <geometry>
-                <box size="0.09 0.09 0.08" />
+                <mesh filename="package://hexapod_description/meshes/L2_Hip.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -86,7 +86,7 @@
         <collision name="L3_Hip_collision">
             <origin xyz="-1.8717173055904367e-09 2.8395102015679187e-05 -0.03749999999999909" rpy="3.947037744235681e-16 -0.0 0.0" />
             <geometry>
-                <box size="0.09 0.09 0.08" />
+                <mesh filename="package://hexapod_description/meshes/L3_Hip.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -108,7 +108,7 @@
         <collision name="R1_Hip_collision">
             <origin xyz="-5.436926464597036e-10 -2.8396543466868707e-05 -0.0375000000000004" rpy="3.94703774423568e-16 2.4310372503823276e-15 3.141592653589793" />
             <geometry>
-                <box size="0.09 0.09 0.08" />
+                <mesh filename="package://hexapod_description/meshes/R1_Hip.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -130,7 +130,7 @@
         <collision name="R2_Hip_collision">
             <origin xyz="5.329070518200751e-17 -2.839641866355881e-05 -0.03749999999999999" rpy="3.94703774423568e-16 9.526600354478707e-17 3.141592653589793" />
             <geometry>
-                <box size="0.09 0.09 0.08" />
+                <mesh filename="package://hexapod_description/meshes/R2_Hip.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -152,7 +152,7 @@
         <collision name="R3_Hip_collision">
             <origin xyz="1.8717173855264947e-09 -2.839773531169598e-05 -0.0374999999999994" rpy="3.947037744235682e-16 -8.475327317661527e-16 3.141592653589793" />
             <geometry>
-                <box size="0.09 0.09 0.08" />
+                <mesh filename="package://hexapod_description/meshes/R3_Hip.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -174,7 +174,7 @@
         <collision name="R1_Crus_collision">
             <origin xyz="-0.018685768413435184 0.017921808755716372 -0.011675028544473465" rpy="2.9586803559888716e-15 9.464173730837164e-15 -3.141592653589791" />
             <geometry>
-                <box size="0.15 0.06 0.06" />
+                <mesh filename="package://hexapod_description/meshes/R1_Crus.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -196,7 +196,7 @@
         <collision name="R2_Crus_collision">
             <origin xyz="-0.05131423213025757 -0.017921808755717222 -0.01167502866927641" rpy="-3.2267052699708074e-15 2.8845764424670263e-15 2.177306834595132e-16" />
             <geometry>
-                <box size="0.15 0.06 0.06" />
+                <mesh filename="package://hexapod_description/meshes/R2_Crus.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -218,7 +218,7 @@
         <collision name="R3_Crus_collision">
             <origin xyz="-0.0513142302585405 -0.017921808755716497 -0.011675027352628008" rpy="-2.453621512756187e-15 8.180845673978275e-15 -7.250680518514371e-16" />
             <geometry>
-                <box size="0.15 0.06 0.06" />
+                <mesh filename="package://hexapod_description/meshes/R3_Crus.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -240,7 +240,7 @@
         <collision name="L1_Crus_collision">
             <origin xyz="0.018685767790268776 0.017921807720593708 0.011675020840395725" rpy="-3.1415926535897922 -3.556422298105262e-15 -3.77670496181703e-30" />
             <geometry>
-                <box size="0.15 0.06 0.06" />
+                <mesh filename="package://hexapod_description/meshes/L1_Crus.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -262,7 +262,7 @@
         <collision name="L2_Crus_collision">
             <origin xyz="0.018685767869742236 0.017921808755716546 0.011675028669276171" rpy="-3.1415926535897922 -8.5685095000437e-15 -9.204085185479184e-30" />
             <geometry>
-                <box size="0.15 0.06 0.06" />
+                <mesh filename="package://hexapod_description/meshes/L2_Crus.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -284,7 +284,7 @@
         <collision name="L3_Crus_collision">
             <origin xyz="0.018685765998024823 0.017921808755717642 0.011675019985925648" rpy="-3.1415926535897922 -9.495586488597836e-15 -8.631228484744494e-30" />
             <geometry>
-                <box size="0.15 0.06 0.06" />
+                <mesh filename="package://hexapod_description/meshes/L3_Crus.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -306,7 +306,7 @@
         <collision name="L1_Foot_collision">
             <origin xyz="-0.01010000007948257 0.019400003427672525 -0.02056704031521055" rpy="6.610591211137782e-14 9.860761315262522e-32 -7.376125237048963e-48" />
             <geometry>
-                <box size="0.18 0.07 0.025" />
+                <mesh filename="package://hexapod_description/meshes/L1_Foot.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -328,7 +328,7 @@
         <collision name="L2_Fo_collision">
             <origin xyz="-0.010100000000000726 0.019399995598791568 -0.02056703928008564" rpy="3.921169725428927e-14 3.697785493220852e-32 -2.766046963891421e-48" />
             <geometry>
-                <box size="0.18 0.07 0.025" />
+                <mesh filename="package://hexapod_description/meshes/L2_Foot.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -350,7 +350,7 @@
         <collision name="L3_Foot_collision">
             <origin xyz="-0.010100001871717198 0.019400004282141385 -0.020567039280084735" rpy="-1.0782612974161142e-15 -2.826793622035183e-44 2.114520685451522e-60" />
             <geometry>
-                <box size="0.18 0.07 0.025" />
+                <mesh filename="package://hexapod_description/meshes/L3_Foot.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -372,7 +372,7 @@
         <collision name="R1_Foot_collision">
             <origin xyz="0.010099999456307032 -0.019399995723592314 -0.020567039280086543" rpy="-3.744677003792175e-15 2.4310372503823272e-15 -3.141592653589793" />
             <geometry>
-                <box size="0.18 0.07 0.025" />
+                <mesh filename="package://hexapod_description/meshes/R1_Foot.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -394,7 +394,7 @@
         <collision name="R2_Foot_collision">
             <origin xyz="0.010099999999999625 -0.019399995598789698 -0.020567039280085676" rpy="2.824311711540962e-16 9.526600354478716e-17 3.141592653589793" />
             <geometry>
-                <box size="0.18 0.07 0.025" />
+                <mesh filename="package://hexapod_description/meshes/R2_Foot.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -416,7 +416,7 @@
         <collision name="R3_Foot_collision">
             <origin xyz="0.010100001871717269 -0.019399996915439015 -0.020567039280085346" rpy="-2.089940004168009e-16 -8.475327317661533e-16 3.141592653589793" />
             <geometry>
-                <box size="0.18 0.07 0.025" />
+                <mesh filename="package://hexapod_description/meshes/R3_Foot.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
