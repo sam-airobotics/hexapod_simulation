@@ -48,10 +48,12 @@ class TripodGaitController(Node):
         self.declare_parameter("gait_frequency", 0.8)
         self.declare_parameter("duty_factor", 0.60)
         self.declare_parameter("stride", 0.35)
-        self.declare_parameter("lift", 0.25)
+        self.declare_parameter("lift", 0.60)
         self.declare_parameter("neutral_hip", 0.0)
-        self.declare_parameter("neutral_knee", 0.75)
+        self.declare_parameter("neutral_knee", 0.37)
+        self.declare_parameter("neutral_knee_right", 0.30)
         self.declare_parameter("neutral_ankle", 0.39)
+        self.declare_parameter("neutral_ankle_right", 0.35)
         self.declare_parameter("max_linear_speed", 0.20)
         self.declare_parameter("deadband", 0.03)
         self.declare_parameter("start_walking", False)
@@ -72,8 +74,12 @@ class TripodGaitController(Node):
         self.neutral_hip = float(self.get_parameter("neutral_hip").value)
         self.neutral_knee = float(
             self.get_parameter("neutral_knee").value)
+        self.neutral_knee_right = float(
+            self.get_parameter("neutral_knee_right").value)
         self.neutral_ankle = float(
             self.get_parameter("neutral_ankle").value)
+        self.neutral_ankle_right = float(
+            self.get_parameter("neutral_ankle_right").value)
         self.max_linear_speed = float(
             self.get_parameter("max_linear_speed").value)
         self.deadband = float(self.get_parameter("deadband").value)
@@ -167,10 +173,15 @@ class TripodGaitController(Node):
         yaw_term = self.command_yaw * 0.30 * side_sign
         hip = self.neutral_hip + side_sign * (hip_path + lateral) + yaw_term
 
-        # Knee and ankle joint coordinates are already mirrored by the URDF
-        # joint axes. Do NOT negate the right-side commands.
-        knee = self.neutral_knee + lift
-        ankle = self.neutral_ankle - 0.65 * lift
+        # The right knee and ankle axes are physically mirrored in the URDF...
+        # Therefore the same physical swing requires opposite joint-space
+        # directions on the right side...
+        if left:
+            knee = self.neutral_knee + lift
+            ankle = self.neutral_ankle - 0.65 * lift
+        else:
+            knee = self.neutral_knee_right - lift
+            ankle = self.neutral_ankle_right + 0.75 * lift
 
         return [hip, knee, ankle]
 
@@ -218,9 +229,19 @@ class TripodGaitController(Node):
             if "Hip" in joint:
                 pose.append(self.neutral_hip)
             elif "Knee" in joint:
-                pose.append(self.neutral_knee)
+                leg = joint[0:2]
+                pose.append(
+                    self.neutral_knee_right
+                    if leg.startswith("R")
+                    else self.neutral_knee
+                )
             else:
-                pose.append(self.neutral_ankle)
+                leg = joint[0:2]
+                pose.append(
+                    self.neutral_ankle_right
+                    if leg.startswith("R")
+                    else self.neutral_ankle
+                )
         return pose
 
 

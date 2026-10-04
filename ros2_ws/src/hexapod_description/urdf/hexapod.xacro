@@ -5,7 +5,7 @@
     <link name="base_link">
         <inertial>
             <origin xyz="0.06531354373116458 0.09547813117381193 0.055845566802461395" rpy="0.0 0.0 0.0" />
-            <mass value="10.813766886555406" />
+            <mass value="1.813766886555406" />
             <inertia ixx="0.052834066282912866" iyy="0.038235219700231526" izz="0.058132624055021655" ixy="-6.396865406510826e-05" iyz="-0.001076769870526382" ixz="-8.416476796523591e-05" />
         </inertial>
         <visual name="base_link_visual">
@@ -422,7 +422,7 @@
     </link>
     <joint name="base_joint" type="fixed">
         <!-- base_footprint is the ground reference. Raise the body so the leg feet can reach z=0. -->
-        <origin xyz="0.0 0.0 0.1446" rpy="0.0 0.0 0.0" />
+        <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0" />
         <parent link="base_footprint" />
         <child link="base_link" />
     </joint>

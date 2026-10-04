@@ -70,7 +70,7 @@ def generate_launch_description():
             os.path.join(pkg_ros_gz_sim, 'launch', 'gz_sim.launch.py')
         ),
         launch_arguments={
-            'gz_args': ['-r -v 4 ', world_file]  # Use the world argument here
+            'gz_args': ['-r -v 4 ', LaunchConfiguration('world')]
         }.items()
     )
 
