@@ -45,10 +45,10 @@ class TripodGaitController(Node):
         self.declare_parameter("command_topic",
                                "/hexapod_position_controller/commands")
         self.declare_parameter("update_rate", 100.0)
-        self.declare_parameter("gait_frequency", 0.8)
-        self.declare_parameter("duty_factor", 0.60)
-        self.declare_parameter("stride", 0.35)
-        self.declare_parameter("lift", 0.60)
+        self.declare_parameter("gait_frequency", 0.65)
+        self.declare_parameter("duty_factor", 0.62)
+        self.declare_parameter("stride", 0.22)
+        self.declare_parameter("lift", 0.28)
         self.declare_parameter("neutral_hip", 0.0)
         self.declare_parameter("neutral_knee", 0.37)
         self.declare_parameter("neutral_knee_right", 0.30)
@@ -134,8 +134,8 @@ class TripodGaitController(Node):
           0..duty       = stance
           duty..1       = swing
 
-        The right-side knee/ankle axes are mirrored in the URDF, so their
-        physical bend direction is mirrored.
+        The right-side joints use mirrored exported frames; the commanded
+        signs below are calibrated from the actual URDF kinematics.
         """
         left = leg.startswith("L")
         side_sign = 1.0 if left else -1.0
@@ -153,9 +153,8 @@ class TripodGaitController(Node):
         if abs(self.command_x) < self.deadband:
             direction = 1.0
 
-        # The URDF mirrors the right-side hip axis. Therefore the same
-        # physical forward/lateral foot displacement requires the opposite
-        # joint sign on the right legs.
+        # The right hip is geometrically mirrored, so its joint command uses
+        # the opposite sign to create the same physical foot displacement.
         if phase < duty:
             s = phase / duty
             u = self.smoothstep(s)
@@ -173,14 +172,15 @@ class TripodGaitController(Node):
         yaw_term = self.command_yaw * 0.30 * side_sign
         hip = self.neutral_hip + side_sign * (hip_path + lateral) + yaw_term
 
-        # The right knee and ankle axes are physically mirrored in the URDF...
-        # Therefore the same physical swing requires opposite joint-space
-        # directions on the right side...
+        # The exported URDF uses mirrored joint frames on the right side...
+        # However, the right knee's physical motion that raises the foot is
+        # still the positive joint direction after the joint-frame rotation...
+        # Use the same physical lift on both sides...
         if left:
             knee = self.neutral_knee + lift
             ankle = self.neutral_ankle - 0.65 * lift
         else:
-            knee = self.neutral_knee_right - lift
+            knee = self.neutral_knee_right + lift
             ankle = self.neutral_ankle_right + 0.75 * lift
 
         return [hip, knee, ankle]
