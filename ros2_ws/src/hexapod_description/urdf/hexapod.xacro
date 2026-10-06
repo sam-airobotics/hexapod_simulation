@@ -436,7 +436,7 @@
         <visual name="lidar_link_visual">
             <origin xyz="-0.035950900915733504 -0.01809786515993314 -0.03369999999999962" rpy="-1.570796326794898 9.568681466994664e-17 0.5497787143782145" />
             <geometry>
-                <mesh filename="meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://hexapod_description/meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
             <material name="Red">
                 <color rgba="1.000000 0.000000 0.000000 1.000000"/>
@@ -445,7 +445,7 @@
         <collision name="lidar_link_collision">
             <origin xyz="-0.035950900915733504 -0.01809786515993314 -0.03369999999999962" rpy="-1.570796326794898 9.568681466994664e-17 0.5497787143782145" />
             <geometry>
-                <mesh filename="meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
+                <mesh filename="package://hexapod_description/meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
             </geometry>
         </collision>
     </link>
@@ -564,7 +564,7 @@
         <child link="R3_Foot" />
         <axis xyz="0.0 -1.0 7.480279667283062e-17" />
     </joint>
-    <joint name="base_link_Lidar_Joint" type="fixed">
+    <joint name="Lidar_Joint" type="fixed">
         <origin xyz="0.046999999999999986 0.09400000000000003 0.150669" rpy="3.141592653589793 6.9388939039072014e-18 -1.5707963267948961" />
         <parent link="base_link" />
         <child link="lidar_link" />
