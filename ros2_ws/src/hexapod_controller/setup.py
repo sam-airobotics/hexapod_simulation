@@ -17,6 +17,7 @@ setup(
     entry_points={
         "console_scripts": [
             "tripod_gait_controller = hexapod_controller.gait_controller:main",
+            "hexapod_teleop = hexapod_controller.teleop:main",
         ],
     },
 )

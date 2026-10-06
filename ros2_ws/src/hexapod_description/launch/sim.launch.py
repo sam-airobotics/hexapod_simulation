@@ -5,6 +5,7 @@ from launch.actions import IncludeLaunchDescription, DeclareLaunchArgument, Time
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration
 from launch_ros.actions import Node
+from launch.conditions import IfCondition
 import xacro
 
 def generate_launch_description():
@@ -45,6 +46,12 @@ def generate_launch_description():
         'world',
         default_value=world_file,
         description='Gazebo world file to load'
+    )
+
+    teleop_arg = DeclareLaunchArgument(
+        'teleop',
+        default_value='false',
+        description='Start teleop_twist_keyboard with the simulation'
     )
 
     # ========================================================================
@@ -151,16 +158,30 @@ def generate_launch_description():
         parameters=[ekf_config_file]
     )
 
+    # Optional custom keyboard teleop. For reliable terminal input, run
+    # `ros2 launch hexapod_description teleop.launch.py` in a second terminal.
+    keyboard_teleop = Node(
+        package='hexapod_controller',
+        executable='hexapod_teleop',
+        name='hexapod_teleop',
+        output='screen',
+        emulate_tty=True,
+        condition=IfCondition(LaunchConfiguration('teleop')),
+    )
+
+
     # ========================================================================
     # 4. RETURN LAUNCH DESCRIPTION
     # ========================================================================
     return LaunchDescription([
-        world_arg, # <--- Added the argument here
+        world_arg,
+        teleop_arg,
         gazebo,
         robot_state_publisher,
         spawn_entity,
         bridge,
         robot_localization_node,
         controller_spawners,
-        rviz
+        rviz,
+        keyboard_teleop
     ])

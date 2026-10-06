@@ -25,12 +25,17 @@
 #  gz_type_name: "gz.msgs.Pose_V"
 #  direction: GZ_TO_ROS
 
-#gz topic subscirbed to by DiffDrive plugin
+# Gazebo-native teleoperation input.
+#
+# Commands published by Gazebo's `gz topic` CLI on
+# /model/hexapod/cmd_vel are bridged into the ROS /cmd_vel topic.
+# The tripod gait controller consumes /cmd_vel and converts the command
+# into the 18 joint-position commands used by ros2_control.
 - ros_topic_name: "cmd_vel"
-  gz_topic_name: "cmd_vel"
+  gz_topic_name: "/model/hexapod/cmd_vel"
   ros_type_name: "geometry_msgs/msg/Twist"
   gz_type_name: "gz.msgs.Twist"
-  direction: ROS_TO_GZ
+  direction: GZ_TO_ROS
 
 #Lidar
 - ros_topic_name: "scan"

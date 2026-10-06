@@ -24,8 +24,13 @@ if(BUILD_TESTING)
 endif()
 
 install(
-  DIRECTORY launch urdf meshes rviz world config config
+  DIRECTORY launch urdf meshes rviz config
   DESTINATION share/${PROJECT_NAME}
+)
+
+install(PROGRAMS
+  scripts/gazebo_teleop.sh
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()
