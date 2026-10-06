@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
-<robot name="hexapod">
+<robot name="hexapod" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Include materials -->
+  <xacro:include filename="$(find hexapod_description)/urdf/materials.xacro"/>
+
+  <!-- Include gazebo -->
+  <xacro:include filename="$(find hexapod_description)/urdf/gazebo.xacro"/>
 
     <link name="base_footprint"/>
     <link name="base_link">
@@ -420,6 +426,30 @@
             </geometry>
         </collision>
     </link>
+
+    <link name="lidar_link">
+        <inertial>
+            <origin xyz="-0.027461976774698915 -0.018137996208371785 -0.01992249948325206" rpy="0.0 -0.0 0.0" />
+            <mass value="0.5012486294496955" />
+            <inertia ixx="0.00016602133606471135" iyy="0.00032461555354666195" izz="0.0003217777330464164" ixy="-8.489893768956169e-07" iyz="-1.2052271770585847e-06" ixz="-8.741763903184424e-06" />
+        </inertial>
+        <visual name="lidar_link_visual">
+            <origin xyz="-0.035950900915733504 -0.01809786515993314 -0.03369999999999962" rpy="-1.570796326794898 9.568681466994664e-17 0.5497787143782145" />
+            <geometry>
+                <mesh filename="meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+            <material name="Red">
+                <color rgba="1.000000 0.000000 0.000000 1.000000"/>
+            </material>
+        </visual>
+        <collision name="lidar_link_collision">
+            <origin xyz="-0.035950900915733504 -0.01809786515993314 -0.03369999999999962" rpy="-1.570796326794898 9.568681466994664e-17 0.5497787143782145" />
+            <geometry>
+                <mesh filename="meshes/lidar_link.stl" scale="0.001 0.001 0.001" />
+            </geometry>
+        </collision>
+    </link>
+
     <joint name="base_joint" type="fixed">
         <!-- base_footprint is the ground reference. Raise the body so the leg feet can reach z=0. -->
         <origin xyz="0.0 0.0 0.05" rpy="0.0 0.0 0.0" />
@@ -534,153 +564,10 @@
         <child link="R3_Foot" />
         <axis xyz="0.0 -1.0 7.480279667283062e-17" />
     </joint>
-
-  <!-- Simplified primitive collision geometry is used because DART cannot
-       construct the CAD STL collision meshes reliably.  Keep STL as visual only. -->
-  <gazebo reference="base_link">
-    <mu1>0.6</mu1>
-    <mu2>0.6</mu2>
-  </gazebo>
-
-  <gazebo reference="L1_Foot">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>100000.0</kp>
-    <kd>10.0</kd>
-  </gazebo>
-  <gazebo reference="L2_Foot">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>100000.0</kp>
-    <kd>10.0</kd>
-  </gazebo>
-  <gazebo reference="L3_Foot">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>100000.0</kp>
-    <kd>10.0</kd>
-  </gazebo>
-  <gazebo reference="R1_Foot">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>100000.0</kp>
-    <kd>10.0</kd>
-  </gazebo>
-  <gazebo reference="R2_Foot">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>100000.0</kp>
-    <kd>10.0</kd>
-  </gazebo>
-  <gazebo reference="R3_Foot">
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>100000.0</kp>
-    <kd>10.0</kd>
-  </gazebo>
-  <!-- ROS 2 Control interface for Gazebo Harmonic / gz_ros2_control. -->
-  <ros2_control name="GazeboSimSystem" type="system">
-    <hardware>
-      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-    </hardware>
-    <joint name="L1_Hip_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
+    <joint name="base_link_Lidar_Joint" type="fixed">
+        <origin xyz="0.046999999999999986 0.09400000000000003 0.150669" rpy="3.141592653589793 6.9388939039072014e-18 -1.5707963267948961" />
+        <parent link="base_link" />
+        <child link="lidar_link" />
     </joint>
-    <joint name="L2_Hip_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L3_Hip_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R1_Hip_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R2_Hip_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R3_Hip_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R1_Knee_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R2_Knee_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R3_Knee_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L1_Knee_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L2_Knee_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L3_Knee_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L1_Ankle_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L2_Ankle_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="L3_Ankle_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R1_Ankle_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R2_Ankle_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-    <joint name="R3_Ankle_Joint">
-      <command_interface name="position"/>
-      <state_interface name="position"/>
-      <state_interface name="velocity"/>
-    </joint>
-  </ros2_control>
-
-  <gazebo>
-    <plugin filename="libgz_ros2_control-system.so"
-            name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-      <parameters>$(find hexapod_controller)/config/controllers.yaml</parameters>
-      <controller_manager_name>controller_manager</controller_manager_name>
-    </plugin>
-  </gazebo>
 
 </robot>
