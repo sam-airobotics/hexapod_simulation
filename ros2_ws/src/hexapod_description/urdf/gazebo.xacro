@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <robot name="hexapod" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<gazebo reference="base_link">
+  <gazebo reference="base_link">
     <mu1>0.6</mu1>
     <mu2>0.6</mu2>
   </gazebo>
@@ -148,61 +148,61 @@
     </plugin>
   </gazebo>
 
-    <gazebo>
-        <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
-        </plugin>
-    </gazebo>
+  <gazebo>
+      <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors">
+      </plugin>
+  </gazebo>
 
-    <gazebo reference="lidar_link">
+  <gazebo reference="lidar_link">
 
-        <sensor name="laser" type="gpu_lidar">
+      <sensor name="laser" type="gpu_lidar">
 
-            <pose>0 0 0 0 0 0</pose>
+          <pose>0 0 0 0 0 0</pose>
 
-            <always_on>true</always_on>
-            <visualize>true</visualize>
+          <always_on>true</always_on>
+          <visualize>true</visualize>
 
-            <update_rate>30</update_rate>
+        <update_rate>30</update_rate>
 
-            <topic>/scan</topic>
+          <topic>/scan</topic>
 
-            <lidar>
+          <lidar>
 
-                <scan>
-                    <horizontal>
-                        <samples>360</samples>
-                        <resolution>1</resolution>
-                        <min_angle>-3.14159265359</min_angle>
-                        <max_angle>3.14159265359</max_angle>
-                    </horizontal>
-                </scan>
+              <scan>
+                  <horizontal>
+                      <samples>360</samples>
+                      <resolution>1</resolution>
+                      <min_angle>-3.14159265359</min_angle>
+                      <max_angle>3.14159265359</max_angle>
+                  </horizontal>
+             </scan>
 
-                <range>
-                    <min>0.30</min>
-                    <max>12.0</max>
-                    <resolution>0.01</resolution>
-                </range>
+              <range>
+                  <min>0.30</min>
+                  <max>12.0</max>
+                  <resolution>0.01</resolution>
+              </range>
 
-            </lidar>
+          </lidar>
 
-        </sensor>
+      </sensor>
 
-    </gazebo>
+  </gazebo>
 
 
-    <gazebo reference="base_link">
-    <sensor name="imu_sensor" type="imu">
-        <always_on>1</always_on>
-        <update_rate>50</update_rate>
-        <visualize>true</visualize>
-        <topic>imu</topic>
-        <gz_frame_id>base_link</gz_frame_id> 
-    </sensor>
-    </gazebo>
+  <gazebo reference="base_link">
+  <sensor name="imu_sensor" type="imu">
+      <always_on>1</always_on>
+      <update_rate>50</update_rate>
+      <visualize>true</visualize>
+      <topic>imu</topic>
+      <gz_frame_id>base_link</gz_frame_id> 
+  </sensor>
+  </gazebo>
 
-    <gazebo>
+  <gazebo>
     <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu">
     </plugin>
-    </gazebo>
+  </gazebo>
 
 </robot>
