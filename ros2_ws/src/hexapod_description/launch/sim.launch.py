@@ -29,9 +29,9 @@ def generate_launch_description():
     ekf_config_file = os.path.join(pkg_share, 'config', 'ekf.yaml')
 
     # === ADDED: Path to your custom world ===
-    # world_file_name = 'model.sdf' # Change this if your world file has a different name
+    world_file_name = 'model.sdf' # Change this if your world file has a different name
     world_file = 'empty.sdf'  # Default to empty world if the specified world file is not found
-    # world_path = os.path.join(pkg_share, 'worlds', 'clean_world', world_file_name)
+    world_path = os.path.join(pkg_share, 'world', world_file_name)
 
     # Process Xacro
     doc = xacro.process_file(xacro_file)

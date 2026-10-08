@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<sdf version="1.6">
+ <world name="ground">
+    
+    <!-- LIGHT -->
+    <light name="sun" type="directional">
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>1 1 1 1</diffuse>
+      <direction>-0.5 0.1 -1</direction>
+    </light>
+
+    <gravity>0 0 -9.8</gravity>
+
+  <model name="ground">
+    <static>true</static>
+
+    <link name="ground">
+
+      <!-- Visual -->
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <uri>package://hexapod_description/world/meshes/ground_rocks_18.obj</uri>
+          </mesh>
+        </geometry>
+      </visual>
+
+      <!-- Collision -->
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <uri>package://hexapod_description/world/meshes/ground_rocks_18.obj</uri>
+          </mesh>
+        </geometry>
+      </collision>
+
+    </link>
+  </model>
+  
+ </world>
+</sdf>
