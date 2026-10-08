@@ -88,7 +88,7 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-name', 'hexapod',
-            '-z', '0.0',  # base_footprint is the world ground reference
+            '-z', '0.5',  # base_footprint is the world ground reference
         ],
         output='screen'
     )
