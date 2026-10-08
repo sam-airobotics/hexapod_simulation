@@ -44,7 +44,7 @@ def generate_launch_description():
     #Declare the world argument
     world_arg = DeclareLaunchArgument(
         'world',
-        default_value=world_file,
+        default_value=world_path,
         description='Gazebo world file to load'
     )
 
@@ -88,7 +88,7 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-name', 'hexapod',
-            '-z', '0.5',  # base_footprint is the world ground reference
+            '-z', '0.1',  # base_footprint is the world ground reference
         ],
         output='screen'
     )

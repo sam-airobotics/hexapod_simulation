@@ -12,29 +12,39 @@
     <gravity>0 0 -9.8</gravity>
 
   <model name="ground">
-    <static>true</static>
+      <!-- Convert Y-up mesh to Gazebo's Z-up coordinate system -->
+      <pose>0 0 0 1.57079632679 0 0</pose>
 
-    <link name="ground">
+      <static>true</static>
 
-      <!-- Visual -->
-      <visual name="visual">
-        <geometry>
-          <mesh>
-            <uri>package://hexapod_description/world/meshes/ground_rocks_18.obj</uri>
-          </mesh>
-        </geometry>
-      </visual>
+      <link name="ground">
 
-      <!-- Collision -->
-      <collision name="collision">
-        <geometry>
-          <mesh>
-            <uri>package://hexapod_description/world/meshes/ground_rocks_18.obj</uri>
-          </mesh>
-        </geometry>
-      </collision>
+          <!-- Visual -->
+          <visual name="visual">
+              <geometry>
+                  <mesh>
+                      <uri>package://hexapod_description/world/meshes/ground_rocks_18.obj</uri>
+                  </mesh>
+              </geometry>
 
-    </link>
+              <material>
+                  <ambient>0.30 0.15 0.05 1</ambient>
+                  <diffuse>0.45 0.22 0.08 1</diffuse>
+                  <specular>0.05 0.03 0.01 1</specular>
+                  <emissive>0 0 0 1</emissive>
+              </material>
+          </visual>
+
+          <!-- Collision -->
+          <collision name="collision">
+              <geometry>
+                  <mesh>
+                      <uri>package://hexapod_description/world/meshes/ground_rocks_18.obj</uri>
+                  </mesh>
+              </geometry>
+          </collision>
+
+      </link>
   </model>
   
  </world>
