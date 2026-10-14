@@ -1,508 +1,101 @@
 # Hexapod Simulation 🕷️
 
-An **18-DOF hexapod simulation** built with **ROS 2 Jazzy** and **Gazebo Harmonic**. The project uses an alternating tripod gait, `ros2_control`, `gz_ros2_control`, Gazebo↔ROS 2 bridging, EKF state estimation, SLAM, and Nav2.
+A ROS 2 and Gazebo simulation project for a six-legged robot, focused on **tripod gait locomotion, sensor integration, state estimation, SLAM, and navigation**.
 
-> **Target environment:** Ubuntu 24.04 + ROS 2 Jazzy + Gazebo Harmonic.
+**Maintainer:** [@sam-airobotics](https://github.com/sam-airobotics)  
+**Target platform:** Ubuntu 24.04 LTS · ROS 2 Jazzy · Gazebo Harmonic
 
----
+<p align="center">
+  <img src="assets/images/hexapod_gazebo.png" alt="Hexapod robot running in Gazebo Harmonic" width="80%">
+</p>
 
-## 1. Features
-
-- 18-DOF hexapod: 6 legs × 3 joints.
-- Alternating tripod gait controller.
-- ROS 2 `/cmd_vel` velocity input.
-- Gazebo-native `/model/hexapod/cmd_vel` bridge.
-- `ros2_control` position control.
-- `gz_ros2_control` integration with Gazebo Harmonic.
-- RViz2 visualization.
-- LiDAR, camera and IMU sensor bridges.
-- EKF state estimation using `robot_localization`.
-- SLAM using `slam_toolbox`.
-- Cartographer launch support.
-- Nav2 localization/navigation configuration.
-- OpenNav Docking integration.
-- Custom Gazebo terrain/world model.
+<p align="center"><em>Hexapod model simulated in Gazebo Harmonic.</em></p>
 
 ---
 
-## 2. System architecture
+## 📌 Project overview
 
-```mermaid
-flowchart TD
-    K[Teleop] --> V[/cmd_vel]
-    V --> T[Tripod Gait Controller]
-    T --> P[hexapod_position_controller]
-    P --> C[gz_ros2_control]
-    C --> G[Gazebo Harmonic]
+This repository contains the robot description, simulation world, gait controller, sensor bridges, and navigation-related packages for a simulated **18-DOF hexapod** (six legs with three joints per leg). Velocity commands are received on ROS 2 `/cmd_vel` and converted into joint-position targets by a custom tripod gait controller.
 
-    G --> B[ros_gz_bridge]
-    B --> JS[/joint_states]
-    B --> I[/imu]
-    B --> L[/scan]
-    B --> CAM[/camera/image_raw]
+The project is intended as a development base for experimenting with legged locomotion and autonomous robotics workflows in simulation.
 
-    JS --> E[robot_localization EKF]
-    I --> E
-    E --> O[/odom]
+## ✨ Features
 
-    L --> S[slam_toolbox / Cartographer]
-    S --> M[/map]
+- **18-DOF hexapod model** with a URDF/Xacro description and mesh assets.
+- **Alternating tripod gait** controller with configurable gait parameters.
+- **Velocity commands** through ROS 2 `/cmd_vel`.
+- **ROS 2 control** using `ros2_control` and `gz_ros2_control`.
+- **Gazebo Harmonic** simulation with a custom world/terrain model.
+- **RViz2 visualization** for robot state and sensor inspection.
+- **Sensor bridges** for LiDAR, camera, IMU, joint states, and simulation clock.
+- **EKF state estimation** configuration using `robot_localization`.
+- **SLAM** launch/configuration support through `slam_toolbox` and Cartographer.
+- **Nav2** localization and navigation configuration.
+- **Dependency installer** for the documented Ubuntu 24.04 / ROS 2 Jazzy setup.
 
-    M --> N[Nav2]
-    O --> N
-    L --> N
-    N --> V
-```
+## 🖥️ Visualization
 
----
+### Gazebo simulation
 
-# 3. Requirements
+Gazebo is used to simulate the hexapod, its world, joints, and simulated sensors.
 
-### Operating system
+<p align="center">
+  <img src="assets/images/hexapod_gazebo.png" alt="Hexapod simulation in Gazebo" width="85%">
+</p>
 
-- Ubuntu 24.04 LTS
+### RViz2 visualization
 
-### Robotics software
+RViz2 provides a view of the robot description and ROS visualization data.
 
-- ROS 2 Jazzy
-- Gazebo Harmonic
-- `ros_gz_sim`
-- `ros_gz_bridge`
-- `gz_ros2_control`
-- `ros2_control`
-- Nav2
-- `slam_toolbox`
-- Cartographer
-- `robot_localization`
-
-### Hardware
-
-The simulation can run without physical hardware. A discrete NVIDIA GPU is not required, although Gazebo/RViz performance depends on the system's graphics capability.
+<p align="center">
+  <img src="assets/images/hexapod_rviz.png" alt="Hexapod robot visualization in RViz2" width="85%">
+</p>
 
 ---
 
-# 4. Install ALL dependencies 🚀
+## 🧰 Technology stack
 
-The repository contains a single dependency installer at the **root of `hexapod_simulation`**:
+| Component | Technology |
+|---|---|
+| Operating system | Ubuntu 24.04 LTS |
+| Robotics middleware | ROS 2 Jazzy |
+| Physics simulation | Gazebo Harmonic |
+| Robot description | URDF / Xacro |
+| Robot control | `ros2_control`, `gz_ros2_control` |
+| Visualization | RViz2 |
+| State estimation | `robot_localization` (EKF) |
+| SLAM | `slam_toolbox`, Cartographer launch support |
+| Navigation | Nav2 configuration |
+
+> **Compatibility note:** The supplied installer explicitly checks for Ubuntu 24.04 and installs ROS 2 Jazzy packages. Ubuntu 22.04 / ROS 2 Humble is not the target configuration for the current installer.
+
+## 🏗️ Repository structure
 
 ```text
 hexapod_simulation/
-├── README.md
-├── install_dependencies.sh    ← dependency installer
 ├── assets/
-└── ros2_ws/
-```
-
-## Step 1 — Clone/download the project
-
-For a Git repository:
-
-```bash
-git clone <YOUR_REPOSITORY_URL>
-cd hexapod_simulation
-```
-
-If you already have the project:
-
-```bash
-cd ~/hexapod_simulation
-```
-
-## Step 2 — Make the installer executable
-
-```bash
-chmod +x install_dependencies.sh
-```
-
-## Step 3 — Install dependencies
-
-Run:
-
-```bash
-./install_dependencies.sh
-```
-
-The script installs the project's required:
-
-- ROS 2 Jazzy packages
-- Gazebo Harmonic integration
-- `ros_gz_sim`
-- `ros_gz_bridge`
-- `gz_ros2_control`
-- `ros2_control`
-- controller packages
-- `robot_localization`
-- `slam_toolbox`
-- Cartographer
-- Nav2
-- OpenNav Docking
-- teleoperation
-- build/colcon/rosdep tools
-
-It also runs `rosdep` against:
-
-```text
-ros2_ws/src
-```
-
-to catch additional package dependencies.
-
----
-
-# 5. What the installer adds to `.bashrc`
-
-`install_dependencies.sh` automatically adds a managed environment block to:
-
-```text
-~/.bashrc
-```
-
-It sources:
-
-```bash
-source /opt/ros/jazzy/setup.bash
-```
-
-and defines:
-
-```bash
-export HEXAPOD_SIM_ROOT="..."
-export HEXAPOD_WS="${HEXAPOD_SIM_ROOT}/ros2_ws"
-```
-
-It also configures Gazebo resource lookup:
-
-```bash
-export GZ_SIM_RESOURCE_PATH="${HEXAPOD_WS}/src:${GZ_SIM_RESOURCE_PATH}"
-export GZ_SIM_RESOURCE_PATH="${HEXAPOD_WS}/install:${GZ_SIM_RESOURCE_PATH}"
-```
-
-This is important for the project's Gazebo resources, especially:
-
-```text
-package://hexapod_description/world/meshes/ground_rocks_18.obj
-```
-
-After installation, reload the shell:
-
-```bash
-source ~/.bashrc
-```
-
----
-
-# 6. Build the workspace
-
-After installing dependencies:
-
-```bash
-cd ~/hexapod_simulation/ros2_ws
-```
-
-Clean previous build artifacts if they exist:
-
-```bash
-rm -rf build install log
-```
-
-Build:
-
-```bash
-colcon build --symlink-install
-```
-
-Source the workspace:
-
-```bash
-source install/setup.bash
-```
-
-Verify the packages:
-
-```bash
-ros2 pkg list | grep hexapod
-```
-
-Expected packages include:
-
-```text
-hexapod_controller
-hexapod_description
-hexapod_nav
-hexapod_slam
-```
-
----
-
-# 7. Launch the simulation
-
-Start the complete Gazebo simulation:
-
-```bash
-ros2 launch hexapod_description sim.launch.py
-```
-
-The launch file starts:
-
-- Gazebo Harmonic
-- custom hexapod world
-- robot state publisher
-- hexapod model
-- `ros_gz_bridge`
-- RViz2
-- `gz_ros2_control`
-- joint-state broadcaster
-- position controller
-- tripod gait controller
-- `robot_localization` EKF
-
----
-
-# 8. Teleoperation
-
-The project uses ROS 2 `geometry_msgs/msg/Twist` on:
-
-```text
-/cmd_vel
-```
-
-Start teleoperation from another terminal:
-
-```bash
-source ~/.bashrc
-cd ~/hexapod_simulation/ros2_ws
-source install/setup.bash
-
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
-```
-
-Standard controls:
-
-| Key       | Action                  |
-| --------- | ----------------------- |
-| `i`     | Forward                 |
-| `,`     | Backward                |
-| `j`     | Rotate left             |
-| `l`     | Rotate right            |
-| `u`     | Forward + rotate left   |
-| `o`     | Forward + rotate right  |
-| `m`     | Backward + rotate left  |
-| `.`     | Backward + rotate right |
-| `k`     | Stop                    |
-| `q / z` | Speed                   |
-
-> **Note:** Standard `teleop_twist_keyboard` does not provide dedicated A/D strafe keys. The custom controller supports `linear.y`, but the default keyboard teleop does not directly expose it.
-
----
-
-# 9. Custom Gazebo teleoperation
-
-The project also contains:
-
-```text
-ros2_ws/src/hexapod_description/scripts/gazebo_teleop.sh
-```
-
-It publishes directly to:
-
-```text
-/model/hexapod/cmd_vel
-```
-
-Run:
-
-```bash
-ros2 run hexapod_description gazebo_teleop.sh
-```
-
-or, if required:
-
-```bash
-bash ~/hexapod_simulation/ros2_ws/src/hexapod_description/scripts/gazebo_teleop.sh
-```
-
-The configured bridge converts the Gazebo command into:
-
-```text
-/cmd_vel
-```
-
----
-
-# 10. Verify the ROS ↔ Gazebo bridge
-
-Check the bridge:
-
-```bash
-ros2 node list | grep bridge
-```
-
-Inspect the main topics:
-
-```bash
-ros2 topic list
-```
-
-Important topics:
-
-| Topic                 | Purpose                 |
-| --------------------- | ----------------------- |
-| `/clock`            | Gazebo simulation clock |
-| `/cmd_vel`          | Body velocity command   |
-| `/joint_states`     | Joint states            |
-| `/odom`             | EKF/odometry            |
-| `/imu`              | IMU                     |
-| `/scan`             | LiDAR                   |
-| `/camera/image_raw` | Camera                  |
-| `/tf`               | TF                      |
-| `/tf_static`        | Static TF               |
-
----
-
-# 11. Verify ros2_control
-
-Check controllers:
-
-```bash
-ros2 control list_controllers
-```
-
-Expected active controllers:
-
-```text
-joint_state_broadcaster
-hexapod_position_controller
-```
-
-Check gait-controller output:
-
-```bash
-ros2 topic echo /hexapod_position_controller/commands
-```
-
-The gait controller publishes **18 joint-position targets**.
-
----
-
-# 12. SLAM
-
-The project includes `slam_toolbox`:
-
-```bash
-ros2 launch hexapod_slam online_async_launch.py
-```
-
-The default configuration is:
-
-```text
-ros2_ws/src/hexapod_slam/config/mapper_params_online_async.yaml
-```
-
-The SLAM node uses the simulated LiDAR topic:
-
-```text
-/scan
-```
-
-and the simulation clock:
-
-```text
-/clock
-```
-
----
-
-# 13. Cartographer
-
-Cartographer launch support is included:
-
-```bash
-ros2 launch hexapod_slam cartographer.launch.py
-```
-
-> **Important:** Inspect `cartographer.launch.py` before using this launch path if your package has been renamed. The current file contains a legacy package-share reference to `bot_slam`; this should match the actual package name (`hexapod_slam`) before relying on the Cartographer launch file.
-
----
-
-# 14. Nav2
-
-Nav2 configuration is located at:
-
-```text
-ros2_ws/src/hexapod_nav/
-├── config/
-│   └── nav2_params.yaml
-└── launch/
-    ├── localization_launch.py
-    └── navigation_launch.py
-```
-
-Localization:
-
-```bash
-ros2 launch hexapod_nav localization_launch.py
-```
-
-Navigation:
-
-```bash
-ros2 launch hexapod_nav navigation_launch.py
-```
-
-The configuration includes:
-
-- AMCL
-- Map Server
-- Planner Server
-- Controller Server
-- MPPI Controller
-- Behavior Server
-- BT Navigator
-- Waypoint Follower
-- Smoother
-- Velocity Smoother
-- Collision Monitor
-- Route Server
-- OpenNav Docking
-
----
-
-# 15. Project structure
-
-```text
-hexapod_simulation/
-├── README.md
+│   └── images/
+│       ├── hexapod_gazebo.png
+│       └── hexapod_rviz.png
 ├── install_dependencies.sh
-├── assets/
-│
 └── ros2_ws/
     └── src/
         ├── hexapod_description/
-        │   ├── config/
-        │   │   ├── bridge_config.yaml
-        │   │   └── ekf.yaml
-        │   ├── launch/
-        │   │   ├── display.launch.py
-        │   │   ├── sim.launch.py
-        │   │   └── teleop.launch.py
-        │   ├── meshes/
-        │   ├── rviz/
-        │   ├── scripts/
-        │   ├── urdf/
-        │   └── world/
-        │       └── model.sdf
-        │
+        │   ├── config/          # Bridge and EKF configuration
+        │   ├── launch/          # Simulation, display, teleop launch files
+        │   ├── meshes/          # Robot geometry
+        │   ├── rviz/            # RViz configuration
+        │   ├── scripts/         # Gazebo teleoperation helper
+        │   ├── urdf/            # URDF/Xacro model
+        │   └── world/           # SDF world and terrain mesh
         ├── hexapod_controller/
-        │   ├── config/
-        │   ├── launch/
+        │   ├── config/          # Controller configuration
         │   └── hexapod_controller/
         │       ├── gait_controller.py
         │       └── teleop.py
-        │
         ├── hexapod_slam/
         │   ├── config/
         │   └── launch/
-        │
         └── hexapod_nav/
             ├── config/
             └── launch/
@@ -510,235 +103,271 @@ hexapod_simulation/
 
 ---
 
-# 16. Dependency summary
+## 🚀 Installation
 
-The installer explicitly covers the dependencies used by the current source tree.
+### 1. Clone the repository
 
-### ROS 2 core
-
-```text
-ros-jazzy-desktop
-ros-jazzy-xacro
-ros-jazzy-robot-state-publisher
-ros-jazzy-joint-state-publisher
-ros-jazzy-rviz2
+```bash
+git clone https://github.com/sam-airobotics/hexapod_simulation.git
+cd hexapod_simulation
 ```
 
-### Gazebo Harmonic
+### 2. Install dependencies
 
-```text
-ros-jazzy-ros-gz
-ros-jazzy-ros-gz-sim
-ros-jazzy-ros-gz-bridge
-ros-jazzy-gz-ros2-control
-gz-harmonic
+The repository provides an installer at the project root. Review the script before running it, since it installs system packages and edits your shell configuration.
+
+```bash
+chmod +x install_dependencies.sh
+./install_dependencies.sh
 ```
 
-### ros2_control
+The installer is designed for Ubuntu 24.04 LTS and installs ROS 2 Jazzy, Gazebo Harmonic integration, control packages, sensor/message packages, SLAM/navigation dependencies, and build tools. It also updates `~/.bashrc` with the project environment.
 
-```text
-ros-jazzy-ros2-control
-ros-jazzy-ros2-controllers
-ros-jazzy-controller-manager
-ros-jazzy-forward-command-controller
-ros-jazzy-joint-state-broadcaster
+Reload the shell configuration:
+
+```bash
+source ~/.bashrc
 ```
 
-### State estimation
+### 3. Build the ROS 2 workspace
 
-```text
-ros-jazzy-robot-localization
+```bash
+cd ~/hexapod_simulation/ros2_ws
+colcon build --symlink-install
+source install/setup.bash
 ```
 
-### SLAM
+If you are rebuilding after changing packages or generated files, you can clean build outputs first:
 
-```text
-ros-jazzy-slam-toolbox
-ros-jazzy-cartographer
-ros-jazzy-cartographer-ros
+```bash
+rm -rf build install log
+colcon build --symlink-install
+source install/setup.bash
 ```
 
-### Nav2
+Verify that the packages are discoverable:
 
-```text
-ros-jazzy-navigation2
-ros-jazzy-nav2-bringup
-ros-jazzy-nav2-amcl
-ros-jazzy-nav2-map-server
-ros-jazzy-nav2-planner
-ros-jazzy-nav2-controller
-ros-jazzy-nav2-bt-navigator
-ros-jazzy-nav2-behaviors
-ros-jazzy-nav2-waypoint-follower
-ros-jazzy-nav2-smoother
-ros-jazzy-nav2-velocity-smoother
-ros-jazzy-nav2-collision-monitor
-ros-jazzy-nav2-lifecycle-manager
-ros-jazzy-nav2-route
-ros-jazzy-nav2-mppi-controller
+```bash
+ros2 pkg list | grep hexapod
 ```
 
-### Docking / teleoperation
+The workspace contains the following project packages:
 
-```text
-ros-jazzy-opennav-docking
-ros-jazzy-teleop-twist-keyboard
-```
+- `hexapod_description`
+- `hexapod_controller`
+- `hexapod_slam`
+- `hexapod_nav`
 
 ---
 
-# 17. Troubleshooting
+## ▶️ Run the simulation
 
-### Gazebo cannot find the terrain
-
-Check:
+After the workspace builds successfully, launch the simulation:
 
 ```bash
-echo $GZ_SIM_RESOURCE_PATH
+source /opt/ros/jazzy/setup.bash
+source ~/hexapod_simulation/ros2_ws/install/setup.bash
+ros2 launch hexapod_description sim.launch.py
 ```
 
-It should contain the workspace source/install locations.
+The launch file is configured to start Gazebo, spawn the hexapod, launch the ROS–Gazebo bridge and RViz2, start the EKF node, and spawn the configured controllers.
 
-Then verify:
+To view only the robot model in RViz2 (without the full Gazebo simulation), use:
 
 ```bash
-ls ~/hexapod_simulation/ros2_ws/src/hexapod_description/world/
+ros2 launch hexapod_description display.launch.py
 ```
 
-and:
+## 🎮 Teleoperation
 
-```bash
-ls ~/hexapod_simulation/ros2_ws/src/hexapod_description/world/meshes/
-```
-
----
-
-### ROS package cannot be found
-
-Run:
+Open a **new terminal** and source the environment:
 
 ```bash
 source /opt/ros/jazzy/setup.bash
 source ~/hexapod_simulation/ros2_ws/install/setup.bash
 ```
 
-Then:
+Start the standard keyboard teleoperation node:
 
 ```bash
-ros2 pkg list | grep hexapod
+ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
 
----
+The default `teleop_twist_keyboard` key mapping includes:
 
-### Controller does not spawn
+| Key | Action |
+|---|---|
+| `i` | Forward |
+| `,` | Backward |
+| `j` | Rotate left |
+| `l` | Rotate right |
+| `u` / `o` | Forward with left / right rotation |
+| `m` / `.` | Backward with left / right rotation |
+| `k` | Stop |
+| `q` / `z` | Increase / decrease speed |
 
-Check:
+The custom tripod gait controller subscribes to `/cmd_vel` and publishes joint-position targets to `/hexapod_position_controller/commands`.
+
+A project helper script is also available at `ros2_ws/src/hexapod_description/scripts/gazebo_teleop.sh`; consult the script's usage and bridge configuration before using it.
+
+## 🔎 Useful ROS 2 checks
+
+List active nodes:
 
 ```bash
-ros2 control list_controllers
+ros2 node list
 ```
 
-and:
+Inspect available topics:
 
 ```bash
-ros2 node list | grep controller
+ros2 topic list
 ```
 
-The Gazebo robot must be spawned before the controller spawners can connect to the `gz_ros2_control` controller manager.
-
----
-
-### `/cmd_vel` is not moving the robot
-
-Check:
+Check incoming velocity commands:
 
 ```bash
 ros2 topic echo /cmd_vel
 ```
 
-Then:
+Check gait-controller joint commands:
 
 ```bash
 ros2 topic echo /hexapod_position_controller/commands
 ```
 
-The expected pipeline is:
+Check controller state:
 
-```text
-/cmd_vel
-   ↓
-tripod_gait_controller
-   ↓
-/hexapod_position_controller/commands
-   ↓
-gz_ros2_control
-   ↓
-Gazebo
+```bash
+ros2 control list_controllers
 ```
+
+Topics configured by the simulation include:
+
+| Topic | Purpose |
+|---|---|
+| `/clock` | Simulation time |
+| `/cmd_vel` | Body velocity command |
+| `/joint_states` | Joint feedback |
+| `/scan` | LiDAR scan |
+| `/camera/image_raw` | Camera image |
+| `/imu` | IMU data |
+| `/odom` | State-estimation/odometry output |
+| `/tf`, `/tf_static` | Coordinate transforms |
+
+Actual topic availability depends on which launch files and nodes are running.
 
 ---
 
-# 18. Important simulation limitation
+## 🧭 SLAM and navigation
 
-The current gait controller is a **joint-space tripod gait**. It does not yet perform full foot-space inverse kinematics, force control, contact estimation, or body stabilization.
+### SLAM Toolbox
 
-Therefore:
-
-- body drift can occur;
-- feet may not maintain ideal ground contact;
-- turning may be asymmetric;
-- strafing may not be physically accurate;
-- the robot can rotate/circle under certain gait configurations.
-
-For a research-grade legged robot, the next major upgrade should be:
-
-```text
-Body velocity
-      ↓
-Foot trajectory generation
-      ↓
-Inverse kinematics
-      ↓
-Joint targets
-      ↓
-ros2_control
-      ↓
-Gazebo
-      ↑
-Contact + IMU + joint feedback
-      │
-Closed-loop gait stabilization
+```bash
+ros2 launch hexapod_slam online_async_launch.py
 ```
 
-These are directly relevant to **legged bionics and humanoid locomotion research**.
+The configuration is stored at:
+
+```text
+ros2_ws/src/hexapod_slam/config/mapper_params_online_async.yaml
+```
+
+### Cartographer
+
+A Cartographer launch file is included:
+
+```bash
+ros2 launch hexapod_slam cartographer.launch.py
+```
+
+Check the launch file's package-share paths and configuration before using it; the repository may contain legacy references that need to be aligned with the current package name.
+
+### Nav2
+
+Navigation and localization launch files are in `ros2_ws/src/hexapod_nav/launch/`:
+
+```bash
+ros2 launch hexapod_nav localization_launch.py
+ros2 launch hexapod_nav navigation_launch.py
+```
+
+Run localization/navigation only after the simulation, required transforms, sensor topics, map, and odometry are configured and verified.
 
 ---
 
-## 19. Quick start
+## ⚙️ How the control pipeline works
 
-For a fresh machine after ROS 2 Jazzy has been installed:
-
-```bash
-cd ~/hexapod_simulation
-chmod +x install_dependencies.sh
-./install_dependencies.sh
-
-source ~/.bashrc
-
-cd ros2_ws
-rm -rf build install log
-colcon build --symlink-install
-
-source install/setup.bash
-
-ros2 launch hexapod_description sim.launch.py
+```mermaid
+flowchart TD
+    A[Teleoperation / velocity source] --> B[/cmd_vel]
+    B --> C[Tripod gait controller]
+    C --> D[/hexapod_position_controller/commands]
+    D --> E[ros2_control + gz_ros2_control]
+    E --> F[Gazebo Harmonic]
+    F --> G[Simulated sensors and joint feedback]
+    G --> H[ROS-Gazebo bridge]
+    H --> I[EKF / SLAM / Nav2]
 ```
 
-Then, in another terminal:
+The current gait controller is a **joint-space tripod-gait implementation**. It maps body-velocity commands into hip, knee, and ankle position targets; it is not yet a complete foot-space inverse-kinematics or force-controlled locomotion stack.
+
+## 🛠️ Troubleshooting
+
+**ROS packages are not found**
 
 ```bash
-source ~/.bashrc
-ros2 run teleop_twist_keyboard teleop_twist_keyboard
+source /opt/ros/jazzy/setup.bash
+source ~/hexapod_simulation/ros2_ws/install/setup.bash
+ros2 pkg list | grep hexapod
 ```
 
-That's the complete installation and startup path.
+**Gazebo cannot find the custom world/terrain**
+
+Check the resource path configured by the installer and confirm the world assets exist:
+
+```bash
+echo "$GZ_SIM_RESOURCE_PATH"
+ls ~/hexapod_simulation/ros2_ws/src/hexapod_description/world
+ls ~/hexapod_simulation/ros2_ws/src/hexapod_description/world/meshes
+```
+
+**The robot does not respond to `/cmd_vel`**
+
+Check each stage of the pipeline:
+
+```bash
+ros2 topic echo /cmd_vel
+ros2 topic echo /hexapod_position_controller/commands
+ros2 control list_controllers
+```
+
+Confirm that the gait controller and `hexapod_position_controller` are running, then inspect terminal logs for controller-manager or bridge errors.
+
+**The robot drifts, rotates unexpectedly, or drags its body**
+
+A joint-space gait does not provide full body stabilization or foot-contact control. Gait timing, joint neutral positions, coordinate-frame conventions, contact/friction settings, and robot geometry can all affect the resulting motion. Treat these as simulation limitations to investigate rather than assuming that command input alone guarantees accurate walking.
+
+---
+
+## 🔬 Future work
+
+Potential next steps for improving locomotion quality and research value:
+
+- Foot trajectory generation and inverse kinematics.
+- Ground-contact detection and stance/swing phase management.
+- IMU-based body stabilization and closed-loop feedback.
+- Gait tuning and performance evaluation across different terrains.
+- Integration testing for SLAM and Nav2 with the legged base.
+
+These areas connect directly to **legged bionics and humanoid locomotion research**: robust contact handling, balance, feedback control, and coordinated leg trajectories are important foundations for more advanced legged robots.
+
+## 📄 License
+
+No license file was confirmed during this README update. Add a `LICENSE` file to specify how others may use, modify, and redistribute this project.
+
+---
+
+<p align="center">
+  Built for robotics simulation, controls development, and legged-locomotion experiments.
+</p>
